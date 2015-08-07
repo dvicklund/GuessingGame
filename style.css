@@ -1,17 +1,23 @@
 p {
-  font-family: ;
+  font-family: sans-serif;
 }
 
 nav {
   float: left;
-  width: 100px;
+  width: 10%;
+  height: 500px;
 }
 
 aside {
   float: right;
-  width: 80px;
+  width: 8%;
+  height: 500px;
 }
 
 footer {
   clear: both;
+}
+
+main {
+  display: block;
 }
