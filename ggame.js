@@ -30,9 +30,11 @@ if(groupies > 9000 && guess > 9000 && groupies > guess) {
 }else if(guess < groupies) {
   gameElement.innerHTML += "<h2>You underestimated " + mFirstName + 
   " greatly</h2><p>I know for a FACT that (s)he has over " + groupies + "!</p>";
-}else{
+}else if(guess == groupies){
   gameElement.innerHTML += "<h1>HOLY CHEESE AND RICE!?!</h1><p>You're right!  Seriously!  Don't ask me how I know this, but " 
     + mFirstName + " has no more or less than " + guess + "!</p>";
+}else {
+  gameElement.innerHTML += "<h2>I don't understand...</h2><p>Something was wrong with your guess.  DO try again?</p>";
 }
 
 //And, finally, write a button to refresh the page and play again.
