@@ -1,0 +1,17 @@
+p {
+  font-family: ;
+}
+
+nav {
+  float: left;
+  width: 100px;
+}
+
+aside {
+  float: right;
+  width: 80px;
+}
+
+footer {
+  clear: both;
+}
