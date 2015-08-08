@@ -1,31 +1,48 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: Verdana, Arial, sans-serif;
+  background-color: #2D7F7F;
+  height: 100%;
 }
 
 header {
-  
+  width: 100%;
+  position: relative;
+  background-color: #A7C173;
+  padding: 5px;
 }
 
 nav {
   position: relative;
   width: 100%;
+  background-color:#63A563;
+  color: #4D794D;
 }
 
 nav a {
   margin: 10px;
+  color: #2D7F7F;
 }
 
 nav li {
   display: inline-block;
   position: relative;
   background-color: #ddd;
-  border: solid 4px #bbb;
+  border: solid 0.5em #bbb;
+}
+
+nav li:hover {
+  background-color: black;
 }
 
 aside {
   float: right;
-  width: 15%;
-  margin: auto 10 auto 10;
+  width: 20%;
+  padding: auto 10 auto 10;
+  min-height: 10em;
 }
 
 footer {
@@ -33,9 +50,18 @@ footer {
   clear: both;
   margin: 30 auto 10 auto;
   padding: 100 auto 10 auto;
+  background-color: #A7C173;
+
 }
 
 main {
+  width: 70%;
+  min-height: 10em;
   display: block;
-  margin: 10 0 50 30;
+  padding: 1em;
+  background-color:whitesmoke;
+}
+
+article{
+  margin-top: 1em;
 }
