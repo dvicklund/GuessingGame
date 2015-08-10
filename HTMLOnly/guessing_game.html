@@ -44,10 +44,12 @@
       }
 
       nav {
+        text-align: center;
         position: relative;
         width: 100%;
         background-color:#219121;
         color: #4D794D;
+        margin-top: -2em;
       }
 
       nav a {
@@ -100,7 +102,7 @@
         background-color: #7BBBBB;
       }
 
-      date {
+      time {
         color: #235523;
       }
 
@@ -110,7 +112,7 @@
 
     </style>
 
-    <header><h1>How Many Groupies?!</h1></header>
+    <header><h1>Guess the Groupies</h1></header>
     
     <nav>
       <ul>
@@ -124,7 +126,7 @@
     <aside>
       <h3>This game brought to you by:</h3>
       <h1><b>MUSIC!</b></h1>
-      <p>Go adopt a Violin today!  Look at this sad little guy...</p>
+      <p>Go adopt a fiddle today!  Look at this sad little guy...</p>
       <img id="violin" src="http://i.imgur.com/PIgfxSu.jpg">
       <p>He needs a warm home with a loving owner.  Can't you see that?  Don't you have a heart?</p><p>Go on over to <a href="http://www.craigslist.org/">Craigslist</a> right now to adopt <b>your</b> new best friend.</p>
     </aside>
@@ -132,7 +134,7 @@
     <main id="game"></main>
 
     <article>
-      <date><em><u>Friday, August 7, 2015</u></em></date>
+      <time><em><u>Friday, August 7, 2015</u></em></time>
       <p>This stupid little game is the proud brainchild of the CEO and founder of Vicklund Ventures, <a href="https://soundcloud.com/dvicklund"><em>legendary</em> musician</a>, and expert chef David Vicklund.  Born in 1988 in Boulder, Colorado, he built his first computer at the age of seven, his first web app at 18, and his first robot at 23.  <sup>They grow up so fast, dont they?</sup>  His skills are currently expanding include <a href="https://www.codefellows.org/">Full-Stack JavaScript Development</a> and electronic music production (unrelated).</p>
       <p>Trained in the culinary arts for a decade in a dojo in the foothills of the Cascade Mountains, he makes his living wielding sharp blades with precision and speed, slicing through the flesh of animals and plants and marrying flavors together in delicious harmony for the delight and sustenance of the local townfolk.</p>
     </article>
@@ -142,54 +144,70 @@
     </footer>
   </body>
   <script type="text/javascript" async>
-    // Game HTML element holder
-    var gameElement = document.getElementById("game");
+    // Initializing all the non-function variables
+    var guess, groupies, musician, gameElement, fullMusicianNameArray, mFirstName;
 
-    // Get user input
-    var musician = prompt("Who is your favorite musician?");
+    // Set game HTML element holder
+    gameElement = document.getElementById("game");
 
-    // Create an arbitrary number of groupies between 0 and 10000 and print to console (for debug)
-    var groupies = Math.round(Math.random() * 10000);
+    // Create an arbitrary number of groupies between 0 and 10000 and print to console (for debug/cheats)
+    groupies = Math.round(Math.random() * 10000);
     console.log(groupies);
 
-    // And get more user input (the random math was moved to directly before this
-    // statement to allow for source-spying cheating while answering this question.)
-    var guess = prompt("How many groupies do you think they have?");
+    // Get user input in various forms
+    var getUserInputBoth = function() {
+      musician = prompt("Who is your favorite Musician?");
+      formatMusicianName();
+      guess = prompt("How many groupies do you think they have?");
+    }
+
+    var getUserInputGuess = function() {
+      guess = prompt("How many groupies do you think they have?");
+    }
 
     // Split musician input string into an array of all (first, middle, last, anything else with a space)
-    var fullMusicianNameArray = musician.split(" ");
-    var mFirstName = fullMusicianNameArray[0];
+    var formatMusicianName = function() {
+      fullMusicianNameArray = musician.split(" ");
+      mFirstName = fullMusicianNameArray[0];
+    }
 
     // Check guess and number and write message according to the input
-    if(Math.abs(groupies - guess) < 1000) {
-      gameElement.innerHTML += "<h2>OHHHH SO CLOSE!!!</h2><p>You were only off by " + Math.abs(groupies-guess) + "!  " + mFirstName + " has exactly " + groupies + "!  Were you cheating?</p>";
-    }
-    else if(groupies > 9000 && guess > 9000 && groupies > guess) {
-      gameElement.innerHTML += "<h2>WOW!!!</h2><p>Over 9000? What a machine " + mFirstName + 
-        " is. You're wrong, though, (s)he has almost " + groupies + ".</p>";
-    }
-    else if(groupies > 9000 && guess > 9000 && groupies < guess){
-      gameElement.innerHTML += "<h2>Hah you're way over.</h2><p>I'm a close, personal friend of " + mFirstName + 
-        "'s and (s)he has a ridiculous number of groupies.  In fact, some would say it's over 9000, and they would be right.  Actually, the true figure is " 
-        + groupies + ", give or take a couple.  Don't worry about how I know.</p>";
-    }
-    else if(guess > groupies) {
-      gameElement.innerHTML += "<h2>You thought how many?!</h2><p>I know " + 
-      mFirstName + " personally, and (s)he only has " + groupies + ".</p>";
-    }
-    else if(guess < groupies) {
-      gameElement.innerHTML += "<h2>You underestimated " + mFirstName + 
-      " greatly</h2><p>I know for a FACT that (s)he has over " + groupies + "!</p>";
-    }
-    else if(guess == groupies) {
-      gameElement.innerHTML += "<h1>HOLY CHEESE AND RICE!?!</h1><p>You're right!  Seriously!  Don't ask me how I know this, but " 
-        + mFirstName + " has no more or less than " + guess + "!</p>";
-    }
-    else {
-      gameElement.innerHTML += "<h2>I don't understand...</h2><p>That didn't make no damn sense.  DO try again?</p>";
+    var checkGuess = function() {
+      if(Math.abs(groupies - guess) < 1000) {
+        gameElement.innerHTML += "<h2>OHHHH SO CLOSE!!!</h2><p>You were only off by " + Math.abs(groupies-guess) + "!  " + mFirstName + " has exactly " + groupies + "!  Were you cheating?</p>";
+      }
+      else if(groupies > 9000 && guess > 9000 && groupies > guess) {
+        gameElement.innerHTML += "<h2>WOW!!!</h2><p>Over 9000? What a machine " + mFirstName + 
+          " is. You're wrong, though, (s)he has almost " + groupies + ".</p>";
+      }
+      else if(groupies > 9000 && guess > 9000 && groupies < guess){
+        gameElement.innerHTML += "<h2>Hah you're way over.</h2><p>I'm a close, personal friend of " + mFirstName + 
+          "'s and (s)he has a ridiculous number of groupies.  In fact, some would say it's over 9000, and they would be right.  Actually, the true figure is " 
+          + groupies + ", give or take a couple.  Don't worry about how I know.</p>";
+      }
+      else if(guess > groupies) {
+        gameElement.innerHTML += "<h2>You thought how many?!</h2><p>I know " + 
+        mFirstName + " personally, and (s)he only has " + groupies + ".</p>";
+      }
+      else if(guess < groupies) {
+        gameElement.innerHTML += "<h2>You underestimated " + mFirstName + 
+        " greatly</h2><p>I know for a FACT that (s)he has over " + groupies + "!</p>";
+      }
+      else if(guess == groupies) {
+        gameElement.innerHTML += "<h1>HOLY CHEESE AND RICE!?!</h1><p>You're right!  Seriously!  Don't ask me how I know this, but " 
+          + mFirstName + " has no more or less than " + guess + "!</p>";
+      }
+      else {
+        gameElement.innerHTML += "<h2>I don't understand...</h2><p>That didn't make no damn sense.  DO try again?</p>";
+      }
+
+      // And, finally, write a button to refresh the page and play again.
+      gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Go Again!</button>";
     }
 
-    //And, finally, write a button to refresh the page and play again.
-    gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Go Again!</button>";
+    // Full game script
+    getUserInputBoth();
+    checkGuess();
+
   </script>
 </html>
