@@ -69,6 +69,8 @@
       }
 
       aside {
+        margin-right: 10%;
+        margin-left: 2em;
         float: right;
         width: 20%;
         padding: 1em;
@@ -86,19 +88,21 @@
       }
 
       main {
-        width: 70%;
+        margin-left: 10%;
+        padding: 2em;
+        width: 50%;
         min-height: 10em;
         display: block;
-        padding: 1em;
         background-color:whitesmoke;
         text-align: center;
       }
 
       article {
         margin-top: 2em;
+        margin-left: 10%;
+        padding: 2em;
+        width: 50%;
         display: block;
-        width: 70%;
-        padding: 1em;
         background-color: #7BBBBB;
       }
 
@@ -116,10 +120,11 @@
     
     <nav>
       <ul>
-        <li><a href="http://www.vicklund.com/">Home</a></li>
-        <li><a href="http://www.vicklund.com/games">Games</a></li>
-        <li><a href="http://www.vicklund.com/beach">Beach</a></li>
-        <li><a href="http://www.google.com/">Also Nowhere</a></li>
+      <!--These go nowhere, yet-->
+        <li><a href="https://www.vicklund.com/">Home</a></li>
+        <li><a href="https://www.vicklund.com/games">Games</a></li>
+        <li><a href="https://soundcloud.com/dvicklund">Music</a></li>
+        <li><a href="https://www.google.com/">Also Nowhere</a></li>
       </ul>
     </nav>
 
@@ -151,8 +156,10 @@
     gameElement = document.getElementById("game");
 
     // Create an arbitrary number of groupies between 0 and 10000 and print to console (for debug/cheats)
-    groupies = Math.round(Math.random() * 10000);
-    console.log(groupies);
+    var setGroupies = function() {
+      groupies = Math.round(Math.random() * 10000);
+      console.log(groupies);
+    }
 
     // Get user input in various forms
     var getUserInputBoth = function() {
@@ -160,15 +167,15 @@
       formatMusicianName();
       guess = prompt("How many groupies do you think they have?");
     }
-
-    var getUserInputGuess = function() {
-      guess = prompt("How many groupies do you think they have?");
-    }
+    // Unimplemented as yet
+    // var getUserInputGuess = function() {
+    //   guess = prompt("How many groupies do you think they have?");
+    // }
 
     // Split musician input string into an array of all (first, middle, last, anything else with a space)
     var formatMusicianName = function() {
       fullMusicianNameArray = musician.split(" ");
-      mFirstName = fullMusicianNameArray[0];
+      mFirstName = fullMusicianNameArray[0].charAt(0).toUpperCase() + fullMusicianNameArray[0].substring(1);
     }
 
     // Check guess and number and write message according to the input
@@ -206,8 +213,9 @@
     }
 
     // Full game script
+    setGroupies();
     getUserInputBoth();
     checkGuess();
-
+    
   </script>
 </html>
