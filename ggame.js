@@ -46,7 +46,7 @@ var formatMusicianName = function() {
 
 // Check guess and number and write message according to the input
 var checkGuess = function() {
-  var unrecognized = false;
+  var recognized = true;
   if(Math.abs(groupies - guess) < 1000 && groupies != guess) {
     gameElement.innerHTML += "<h2>OHHHH SO CLOSE!!!</h2><p>You were only off by " + Math.abs(groupies-guess) + "!  " + mFirstName + " has exactly " + groupies + "!  Were you cheating?</p>";
   }
@@ -73,15 +73,15 @@ var checkGuess = function() {
   }
   else {
     gameElement.innerHTML += "<h2>I don't understand...</h2><p>That didn't make no damn sense.  DO try again?</p>";
-    unrecognized = true;
+    recognized = false;
   }
 
-  // And, finally, write a button to refresh the page and play again.
-  gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Go Again!</button>";
+  // And, finally, write a button to refresh the page to clear and play again.
+  gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Start Again!</button>";
 
   // Another button to change options depending whether input was recognized
-  if (!unrecognized) {
-    gameElement.innerHTML += "<button type='button' onClick='getUserInputMusician()'>Screw Mr(s). " + mLastName + "!</button>";
+  if (recognized) {
+    gameElement.innerHTML += "<button type='button' onClick='getUserInputMusician()'>And Besides Mr(s). " + mLastName + "?</button>";
   }
   else {
     gameElement.innerHTML += "<button type='button' onClick='getUserInputMusician()'>Change Musician</button>";
