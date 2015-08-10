@@ -10,20 +10,24 @@ var setGroupies = function() {
   console.log(groupies);
 }
 
-// Get user input in various forms
-var getUserInputBoth = function() {
-  setGroupies();
+// Primary input function
+var getInitialUserInput = function() {
   musician = prompt("Who is your favorite musician?");
-  formatMusicianName();
-  getUserInputGuess();
-  checkGuess();
+  gameProcess();
 }
+
+// Secondary input functions
 var getUserInputGuess = function() {
   guess = prompt("And how many groupies do you think they have?");
 }
 var getUserInputMusician = function() {
-  setGroupies();
   musician = prompt("Who is your NEXT favorite musician?");
+  gameProcess();
+}
+
+// Full answer generation, guess comparison, and printing function
+var gameProcess = function() {
+  setGroupies();
   formatMusicianName();
   getUserInputGuess();
   checkGuess();
@@ -88,5 +92,5 @@ var checkGuess = function() {
   }
 }
 
-// Main game function
-getUserInputBoth();
+// Start the game!
+getInitialUserInput();
