@@ -150,7 +150,7 @@
   </body>
   <script type="text/javascript" async>
     // Initializing all the non-function variables
-    var guess, groupies, musician, gameElement, fullMusicianNameArray, mFirstName;
+    var guess, groupies, musician, gameElement, fullMusicianNameArray, mFirstName, mLastName;
 
     // Set game HTML element holder
     gameElement = document.getElementById("game");
@@ -163,24 +163,42 @@
 
     // Get user input in various forms
     var getUserInputBoth = function() {
-      musician = prompt("Who is your favorite Musician?");
+      setGroupies();
+      musician = prompt("Who is your favorite musician?");
       formatMusicianName();
-      guess = prompt("How many groupies do you think they have?");
+      getUserInputGuess();
+      checkGuess();
     }
-    // Unimplemented as yet
-    // var getUserInputGuess = function() {
-    //   guess = prompt("How many groupies do you think they have?");
-    // }
+    var getUserInputGuess = function() {
+      guess = prompt("And how many groupies do you think they have?");
+    }
+    var getUserInputMusician = function() {
+      setGroupies();
+      musician = prompt("Who is your NEXT favorite musician?");
+      formatMusicianName();
+      getUserInputGuess();
+      checkGuess();
+    }
 
-    // Split musician input string into an array of all (first, middle, last, anything else with a space)
+    // Split musician input string into an array of all (first, middle, last, anything else with a 
+    // space) and capitalize the first letter of each name.  Then, set first and last name.
     var formatMusicianName = function() {
       fullMusicianNameArray = musician.split(" ");
-      mFirstName = fullMusicianNameArray[0].charAt(0).toUpperCase() + fullMusicianNameArray[0].substring(1);
+
+      var tmpName;
+      for (name in fullMusicianNameArray) {
+        tmpName = fullMusicianNameArray[name].charAt(0).toUpperCase() + fullMusicianNameArray[name].substring(1);
+        fullMusicianNameArray[name] = tmpName;
+      }
+
+      mFirstName = fullMusicianNameArray[0];
+      mLastName = fullMusicianNameArray[fullMusicianNameArray.length - 1];
     }
 
     // Check guess and number and write message according to the input
     var checkGuess = function() {
-      if(Math.abs(groupies - guess) < 1000) {
+      var recognized = true;
+      if(Math.abs(groupies - guess) < 1000 && groupies != guess) {
         gameElement.innerHTML += "<h2>OHHHH SO CLOSE!!!</h2><p>You were only off by " + Math.abs(groupies-guess) + "!  " + mFirstName + " has exactly " + groupies + "!  Were you cheating?</p>";
       }
       else if(groupies > 9000 && guess > 9000 && groupies > guess) {
@@ -206,16 +224,22 @@
       }
       else {
         gameElement.innerHTML += "<h2>I don't understand...</h2><p>That didn't make no damn sense.  DO try again?</p>";
+        recognized = false;
       }
 
-      // And, finally, write a button to refresh the page and play again.
-      gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Go Again!</button>";
+      // And, finally, write a button to refresh the page to clear and play again.
+      gameElement.innerHTML += "<button type='button' onClick='window.location.reload()'>Start Again!</button>";
+
+      // Another button to change options depending whether input was recognized
+      if (recognized) {
+        gameElement.innerHTML += "<button type='button' onClick='getUserInputMusician()'>And Besides Mr(s). " + mLastName + "?</button>";
+      }
+      else {
+        gameElement.innerHTML += "<button type='button' onClick='getUserInputMusician()'>Change Musician</button>";
+      }
     }
 
-    // Full game script
-    setGroupies();
+    // Main game function
     getUserInputBoth();
-    checkGuess();
-    
   </script>
 </html>
